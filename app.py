@@ -51,8 +51,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static folder for frontend files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 # OMDB API Key
 OMDB_API_KEY = "3d7c9a51"
@@ -188,9 +187,7 @@ def get_movie_details_by_title(title: str):
     return JSONResponse(content=details)
 
 # Serve frontend HTML
-@app.get("/")
-def serve_index():
-    return FileResponse("static/nwpg.html")
+
 
 # Recommend movies endpoint
 @app.get("/recommend")
@@ -243,3 +240,4 @@ def recommend_movies(title: str):
         return JSONResponse(content={"error": "Could not find suitable recommendations. Try a different movie."}, status_code=404)
 
     return JSONResponse(content=recommendations)
+
